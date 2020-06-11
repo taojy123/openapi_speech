@@ -201,8 +201,9 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       </p>
 
       <ul>
-          <li><a href="#2384216508680" class="scroll-to">Swagger</a></li>
-          <li><a href="#2384216508960" class="scroll-to">OpenAPI</a></li>
+          <li><a href="#4506700304" class="scroll-to">Swagger</a></li>
+          <li><a href="#4506700368" class="scroll-to">OpenAPI</a></li>
+          <li><a href="#4506700688" class="scroll-to">Django REST framework</a></li>
       </ul>
 
       <hr>
@@ -215,13 +216,19 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 <li>RAML <br><br>  <img src="assets/raml_logo.png" width="200"> <br></li>
 <li>API Blueprint <br><br>  <img src="assets/apiblueprint_logo.jpg" width="200"> <br></li>
 <li>其他工具 <br><br>  <img src="assets/other_tools.jpg" width="200"> <br></li>
-<li>啥都不需要，用手写就行 <br><br>  <img src="assets/hand.png" width="200"> <br></li>
+<li>啥都不需要，用手写就行 <br><br>  <img src="assets/hand.png" width="200"> <br>
+<br><br><br><br></li>
 </ol>
 </p>
         </div>
         <div>
-            <h3>今天我们话题，接口文档</h3>
-          <p><h4>说程序员最痛恨的 4 件事情</h4>
+            <h3>开始今天我们话题，接口文档</h3>
+          <p><ul>
+<li>谁写文档: <code>后端工程师</code></li>
+<li>写给谁看: <code>前端工程师</code>
+<br><br></li>
+</ul>
+<h4>说程序员最痛恨的 4 件事情</h4>
 <ol>
 <li>写注释</li>
 <li>写文档</li>
@@ -229,10 +236,6 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 <li>别人不写文档
 <br><br></li>
 </ol>
-<ul>
-<li>谁写文档: <code>后端工程师</code></li>
-<li>写给谁看: <code>前端工程师</code></li>
-</ul>
 <h4>青铜玩家的文档</h4>
 <p><img src="assets/api_doc.png" width="600">
 <br><br></p>
@@ -248,6 +251,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 </p>
         </div>
         <div>
+            <h3>小结一下</h3>
           <p><h5>编写文档对于每一个普通的开发人员来说，可能算是一种 “负担”</h5>
 <h5>但是在<strong>前后端分离</strong>大势所趋的今天</h5>
 <h5>能够编写一份<strong>可读性高</strong>、<strong>方便传阅交流</strong>的接口文档已成为每一位<strong>后端开发者</strong>的必备技能</h5>
@@ -258,10 +262,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
         <hr>
 
 
-        <h1 id="2384216508680">Swagger</h1>
+        <h1 id="4506700304">Swagger</h1>
 
           <div class="endpoint get">
-            <a href="写完代码后就能同步产出成品文档" target="_blank" style="color: inherit">写完代码后就能同步产出成品文档</a>
+            <a href="/写完代码/就能同步产出成品文档" target="_blank" style="color: inherit">/写完代码/就能同步产出成品文档</a>
           </div>
 
 
@@ -291,10 +295,10 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
         <hr>
 
 
-        <h1 id="2384216508960">OpenAPI</h1>
+        <h1 id="4506700368">OpenAPI</h1>
 
           <div class="endpoint post">
-            <a href="从 swagger2 到 openapi3" target="_blank" style="color: inherit">从 swagger2 到 openapi3</a>
+            <a href="/从 swagger2 /到 openapi3" target="_blank" style="color: inherit">/从 swagger2 /到 openapi3</a>
           </div>
 
 
@@ -306,18 +310,356 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
 
 
+            <p>
+                返回结果说明:
+            </p>
+            <h4>各其他主流工具的对比</h4>
+<ol>
+<li><code>OpenAPI</code>: 根据规范编写出 <code>yaml</code> 或 <code>json</code> 文件，然后使用 <code>Swagger</code>、<code>ReDoc</code> 等渲染出成品文档</li>
+<li><code>RAML</code>: 根据规范编写出 <code>raml</code> 文件，然后使用 <code>raml2html</code> 等渲染出成品文档</li>
+<li><code>API Blueprint</code>: 根据规范编写出 <code>markdown</code> 文件，然后使用 <code>Aglio</code>、<code>snowboard</code> 等渲染出成品文档</li>
+</ol>
+<h4>规范简介</h4>
+<p><img src="assets/2to3.png" alt="avatar"></p>
+<p>参考: <a href="https://stuff.rdme.io/swagger2to3">https://stuff.rdme.io/swagger2to3</a></p>
+<pre><code># OpenAPI 规范版本号
+openapi: 3.0.3
+
+# API 元数据信息
+info:
+
+# 服务器连接信息
+servers:
+
+# API 的分组标签
+tags:
+
+# 声明 API 使用的安全机制
+security:
+
+# 对所提供的 API 有效的路径和操作
+paths:
+
+# 一个包含多种纲要的元素，可重复使用组件
+components:
+
+# 附加文档
+externalDocs:
+</code></pre>
+<h4>info 部分</h4>
+<pre><code>info:
+  title:  xx开放平台接口文档                    # 应用的名称
+  description: |                          
+    简短的描述信息，支持 markdown 语法。 | 表示换行，&lt; 表示忽略换行。
+  version: "1.0.0"                            # API 文档的版本信息
+  termsOfService: 'http://swagger.io/terms/'  # 指向服务条款的 URL 地址
+  contact:                                    # 所开放的 API 的联系人信息
+    name: API Support                           # 人或组织的名称
+    url: http://www.example.com/support         # 指向联系人信息的 URL 地址
+    email: apiteam@swagger.io                   # 人或组织的 email 地址
+  license:                                    # 所开放的 API 的证书信息。
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+</code></pre>
+<h4>servers 部分</h4>
+<pre><code>servers:  
+  - url: https://development.server.com/v1
+    description: 开发服务器
+  - url: https://{subdomain}.site.com/{version}
+    description: 生产服务器
+    variables:
+      subdomain:
+        default: production
+      version:
+        enum:
+          - v1
+          - v2
+        default: v2
+</code></pre>
+<h4>tags 部分</h4>
+<pre><code>tags: 
+  - name: store
+    description: 宠物商店
+  - name: user
+    description: 用户操作相关
+  - name: pet
+    description: 与宠物相关的接口
+    externalDocs:
+      description: 外部文档
+      url: 'http://pet.docs.io'
+</code></pre>
+<h4>security 部分</h4>
+<pre><code>BasicAuth:
+  type: http
+  scheme: basic
+
+JWT:
+  type: http
+  scheme: bearer
+  bearerFormat: jwt
+
+APIKey:
+  type: apiKey
+  name: api_key
+  in: header
+</code></pre>
+<h4>paths 部分</h4>
+<pre><code># 对所提供的 API 有效的路径和操作
+paths:
+  /pet/{petId}:
+    get:
+      tags:
+        - pet
+      summary: 简要总结，描述此路径内包含的所有操作。
+      description: 详细说明，用于描述此路径包含的所有操作。
+      operationId: getPetById      # 此操作的唯一标识符
+      parameters:                 # 参数列表
+        - name: petId
+          in: path
+          description: 路径参数，宠物 ID。
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:                  # 接口响应内容
+        '200':
+          description: 操作成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                  category:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        format: int64
+                      name:
+                        type: string
+                  name:
+                    type: string
+                    example: doggie
+                  photoUrls:
+                    type: array
+                    items:
+                      type: string
+                  tags:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          format: int64
+                        name:
+                          type: string
+                  status:
+                    type: string
+                    description: 宠物在商店的状态
+                    enum:
+                      - available
+                      - pending
+                      - sold
+        '400':
+          description: 无效的 id
+        '404':
+          description: 找不到指定的资源
+      security:             # 作用于此操作的安全机制
+        - APIKey: []         # 可以声明一个空数组来变相的移除顶层的安全声明
+</code></pre>
+<h4>components 部分</h4>
+<pre><code>components:
+  schemas:
+
+  responses:
+
+  parameters:
+
+  examples:
+
+  requestBodies:
+
+  headers:
+
+  securitySchemes:
+
+  links:
+
+  callbacks:
+</code></pre>
+<h4>上例使用 components 优化</h4>
+<pre><code>paths:
+  '/pet/{petId}':
+    get:
+      tags:
+        - pet
+      summary: 简要总结，描述此路径内包含的所有操作
+      description: 详细说明，用于描述此路径包含的所有操作
+      operationId: getPetById      # 此操作的唯一标识符
+      parameters:                  # 参数列表
+        - name: petId
+          in: path
+          description: pet ID
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:                  # 响应列表
+        '200':
+          description: 操作成功
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+        '400':
+          description: 无效的 id
+        '404':
+          description: 找不到指定的资源
+      security:             # 作用于此操作的安全机制
+        - api_key: []         # 可以声明一个空数组来变相的移除顶层的安全声明
+
+components:
+  schemas:
+    Pet:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        category:
+          $ref: '#/components/schemas/Category'
+        name:
+          type: string
+          example: doggie
+        photoUrls:
+          type: array
+          items:
+            type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        status:
+          type: string
+          description: 宠物在商店的状态
+          enum:
+            - available
+            - pending
+            - sold
+    Category:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+</code></pre>
+<h4>POST 传参的例子</h4>
+<pre><code>paths:
+  /pet:
+    post:
+      tags:
+        - pet
+      summary: 向商店中添加新的宠物
+      operationId: addPet
+      requestBody:    # 请求体
+        description: 需要被添加进商店的 Pet 对象
+        required: true # 请求体是否被包含在请求中，默认值 false
+        content:      # 请求体的内容
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+</code></pre>
+<p>参考: <a href="https://www.jianshu.com/p/5365ef83252a">https://www.jianshu.com/p/5365ef83252a</a></p>
+<h4>生成文档:</h4>
+<pre><code class="lang-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Swagger&lt;/title&gt;
+    &lt;meta charset=&quot;utf-8&quot;/&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;//unpkg.com/swagger-ui-dist@3/swagger-ui.css&quot; /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id=&quot;swagger-ui&quot;&gt;&lt;/div&gt;
+    &lt;script src=&quot;//unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+    const ui = SwaggerUIBundle({
+        url: &quot;{% url schema_url %}&quot;,
+        dom_id: &#39;#swagger-ui&#39;,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIBundle.SwaggerUIStandalonePreset
+        ],
+        layout: &quot;BaseLayout&quot;
+      })
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;ReDoc&lt;/title&gt;
+    &lt;!-- needed for adaptive design --&gt;
+    &lt;meta charset="utf-8"/&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet"&gt;
+    &lt;!-- ReDoc doesn't change outer page styles --&gt;
+    &lt;style&gt;
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;redoc spec-url='{% url schema_url %}'&gt;&lt;/redoc&gt;
+    &lt;script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"&gt; &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+
+
+
+
+        <hr>
+
+
+        <h1 id="4506700688">Django REST framework</h1>
+
+          <div class="endpoint put">
+            <a href="/3.9 版本开始/官方支持 openapi3" target="_blank" style="color: inherit">/3.9 版本开始/官方支持 openapi3</a>
+          </div>
+
+
+
+
+
+
+
+            <p>
+                返回结果说明:
+            </p>
+            
 
 
             <div class="alert alert-warning">
-              <h4>与其他主流工具的对比</h4>
-<ol>
-<li><code>OpenAPI</code>: 根据规范编写出 <code>yaml</code> 或 <code>json</code> 文件，然后使用 <code>swagger</code>、<code>redoc</code> 等渲染出成品文档</li>
-<li><code>RAML</code>: 根据规范编写出 <code>raml</code> 文件，然后使用 <code>raml2html</code> 等渲染出成品文档</li>
-<li><code>API Blueprint</code>: 根据规范编写出 <code>markdown</code> 文件，然后使用 <code>aglio</code>、<code>snowboard</code> 等渲染出成品文档</li>
-</ol>
-<p>openapi
-drf</p>
-
+              
             </div>
 
 
