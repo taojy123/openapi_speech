@@ -197,24 +197,140 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       -->
 
       <p>
-          Contents
+          接口目录:
       </p>
 
       <ul>
+          <li><a href="#2384216508680" class="scroll-to">Swagger</a></li>
+          <li><a href="#2384216508960" class="scroll-to">OpenAPI</a></li>
       </ul>
 
       <hr>
 
+        <div>
+            <h3>开场小互动</h3>
+          <p><h4>大家一般使用什么工具写接口文档?</h4>
+<ol>
+<li>Swagger(openapi) <br><br> <img src="assets/swagger_logo.png" width="200"> <br></li>
+<li>RAML <br><br>  <img src="assets/raml_logo.png" width="200"> <br></li>
+<li>API Blueprint <br><br>  <img src="assets/apiblueprint_logo.jpg" width="200"> <br></li>
+<li>其他工具 <br><br>  <img src="assets/other_tools.jpg" width="200"> <br></li>
+<li>啥都不需要，用手写就行 <br><br>  <img src="assets/hand.png" width="200"> <br></li>
+</ol>
+</p>
+        </div>
+        <div>
+            <h3>今天我们话题，接口文档</h3>
+          <p><h4>说程序员最痛恨的 4 件事情</h4>
+<ol>
+<li>写注释</li>
+<li>写文档</li>
+<li>别人不写注释</li>
+<li>别人不写文档
+<br><br></li>
+</ol>
+<ul>
+<li>谁写文档: <code>后端工程师</code></li>
+<li>写给谁看: <code>前端工程师</code></li>
+</ul>
+<h4>青铜玩家的文档</h4>
+<p><img src="assets/api_doc.png" width="600">
+<br><br></p>
+<h4>其实我们可以有更高一点的追求</h4>
+<p><img src="assets/snowboard_example.png" width="700">
+<img src="assets/redoc-demo.png" width="800"></p>
+<ol>
+<li>界面美观</li>
+<li>多端浏览</li>
+<li>方便维护
+<br><br><br></li>
+</ol>
+</p>
+        </div>
+        <div>
+          <p><h5>编写文档对于每一个普通的开发人员来说，可能算是一种 “负担”</h5>
+<h5>但是在<strong>前后端分离</strong>大势所趋的今天</h5>
+<h5>能够编写一份<strong>可读性高</strong>、<strong>方便传阅交流</strong>的接口文档已成为每一位<strong>后端开发者</strong>的必备技能</h5>
+<h5>如果能有个工具来<strong>自动</strong>干这件事那就更棒了!</h5>
+</p>
+        </div>
 
+        <hr>
+
+
+        <h1 id="2384216508680">Swagger</h1>
+
+          <div class="endpoint get">
+            <a href="写完代码后就能同步产出成品文档" target="_blank" style="color: inherit">写完代码后就能同步产出成品文档</a>
+          </div>
+
+
+            <div class="alert alert-ee"><p><strong>解决痛点:</strong></p>
+<p>随着时间推移，不断修改接口实现的时候都必须同步修改接口文档，而文档与代码又处于两个不同的媒介，除非有严格的管理机制，不然很容易导致不一致现象。</p>
+</div>
+
+
+
+
+
+
+
+            <div class="alert alert-warning">
+              <p><img src="assets/swagger_ui_example.png" width="800"></p>
+<h4>被很多著名的框架都直接或间接的支持</h4>
+<ol>
+<li>Java 领域，著名的 <code>spring-swagger</code>，后更名为 <code>springfox</code></li>
+<li>django-rest-framework 搭配 <code>drf_yasg</code> 或 <code>coreapi</code></li>
+<li><code>FastAPI</code> 更是完美的原生支持，可一键生成 swagger 风格文档</li>
+<li>...</li>
+</ol>
+
+            </div>
+
+
+        <hr>
+
+
+        <h1 id="2384216508960">OpenAPI</h1>
+
+          <div class="endpoint post">
+            <a href="从 swagger2 到 openapi3" target="_blank" style="color: inherit">从 swagger2 到 openapi3</a>
+          </div>
+
+
+            <div class="alert alert-ee"><h5>OpenAPI 是规范</h5>
+<h5>Swagger 是实现规范的工具</h5>
+</div>
+
+
+
+
+
+
+
+            <div class="alert alert-warning">
+              <h4>与其他主流工具的对比</h4>
+<ol>
+<li><code>OpenAPI</code>: 根据规范编写出 <code>yaml</code> 或 <code>json</code> 文件，然后使用 <code>swagger</code>、<code>redoc</code> 等渲染出成品文档</li>
+<li><code>RAML</code>: 根据规范编写出 <code>raml</code> 文件，然后使用 <code>raml2html</code> 等渲染出成品文档</li>
+<li><code>API Blueprint</code>: 根据规范编写出 <code>markdown</code> 文件，然后使用 <code>aglio</code>、<code>snowboard</code> 等渲染出成品文档</li>
+</ol>
+<p>openapi
+drf</p>
+
+            </div>
+
+
+        <hr>
 
 
 
 
       <footer>
         <div class="print-tips" onclick="alert(
-              'We recommend printing in Chrome, please check `Background Graphics` in the settings options and uncheck ` Headers and footers `.'
+              '推荐在 Chrome 浏览器中打印，请在设置选项中勾选中 `背景图形`，并取消勾选 `页眉和页脚`。'
         );window.print()">
-              Print This Document
+              打印本文档
         </div>
         <div class="power-by" style="font-weight: bold; float: right">
             Power By <a href="https://github.com/taojy123/eave" target="_blank">Eave</a>
