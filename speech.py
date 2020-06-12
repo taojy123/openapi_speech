@@ -1,20 +1,20 @@
+import base64
+
 from eave import Doc, Note, Api, PP, QP, BP
 
 
 def img(src, w=0):
-    if not src.startswith('http:'):
-        # src = 'https://raw.githubusercontent.com/taojy123/openapi_speech/master/assets/' + src
-        # src = 'https://github.com/taojy123/openapi_speech/raw/master/assets/' + src
-        src = 'assets/' + src
-    if w:
-        return f'<img src="{src}" width="{w}">'
-    return f'![avatar]({src})'
+    data = open('assets/' + src, 'rb').read()
+    data = base64.b64encode(data).decode()
+    src = f'data:image/png;base64,{data}'
+    w = w or ''
+    return f'<img src="{src}" width="{w}">'
+
 
 def img2(src):
-    if not src.startswith('http:'):
-        # src = 'https://raw.githubusercontent.com/taojy123/openapi_speech/master/assets/' + src
-        src = 'assets/' + src
-    return f'<img src="{src}" style="border: solid 1px gray;border-radius: 20px;">'
+    s = img(src)
+    s = s.replace('width=""', 'style="border: solid 1px gray;border-radius: 20px;"')
+    return s
 
 
 doc = Doc(title='OpenAPI 在 Django 项目中的应用 ', host='openapi.tslow.cn', version='2020-06-14')
@@ -26,7 +26,7 @@ note.content = f"""
 1. Swagger(openapi) <br><br> {img('swagger_logo.png', 200)} <br>
 2. RAML <br><br>  {img('raml_logo.png', 200)} <br>
 3. API Blueprint <br><br>  {img('apiblueprint_logo.jpg', 200)} <br>
-4. 其他工具 <br><br>  {img('other_tools.jpg', 200)} <br>
+4. 其他工具 <br><br>  {img('other_tools.png', 200)} <br>
 5. 啥都不需要，用手写就行 <br><br>  {img('hand.png', 200)} <br>
 <br><br><br><br>
 """
@@ -444,7 +444,8 @@ api.description = f"""
 2. 历史人气最高 `django-rest-swagger`，已停更 <br><br> {img('drf_swagger.png')} <br>
 3. 继承者 `drf-yasg`，只支持 swagger2 <br><br> {img('drf_yasg.png')} <br>
 """
-api.tips = f"""
+
+api.response_description = f"""
 #### 官方自带生成 openapi3
 ```python
 from rest_framework.schemas import get_schema_view
@@ -457,22 +458,36 @@ urlpatterns = [
 {img('drf_openapi.png')}
 
 #### 可惜，还没有 UI！
+<br>
 
-#### 不过，自己写一个也不难:
-```html
+#### 不过，自己写一个也不难
+```python
 from django.views.generic import TemplateView
 
 urlpatterns = [
+    path('openapi/', get_schema_view(title='XXX API Document'), name='openapi'),
     path('swagger-ui/', TemplateView.as_view(
         template_name='swagger-ui.html',
-        extra_context={'schema_url': 'openapi'}
+        extra_context={{'schema_url': 'openapi'}}
     ), name='swagger-ui'),
 ]
 ```
+<br><br>
+"""
 
-
+api.tips = """
+#### 看似很完美，其实问题不少
+1. 没有 `security` 安全机制说明
+2. 文档中无法体现 `versioning`
+3. 没有使用 `components` 进行优化
+4. 字段参数的 `description` 是用的是 `help_text` ，而非 `label`
+5. 字段参数没有默认值
+6. 含有 lazytext 的话，生成 openapi 时会出错
+7. django_filter 中的参数 `description` 没有语义化
+8. 自定义 action
 """
 doc.add_api(api)
+
 
 
 
