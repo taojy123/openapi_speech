@@ -185,7 +185,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
       <ul>
         <li>Version: <code>2020-06-14</code></li>
-        <li>Host: <code>speech.tslow.cn</code></li>
+        <li>Host: <code>openapi.tslow.cn</code></li>
       </ul>
 
 
@@ -201,9 +201,9 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
       </p>
 
       <ul>
-          <li><a href="#4433754896" class="scroll-to">Swagger</a></li>
-          <li><a href="#4433754768" class="scroll-to">OpenAPI</a></li>
-          <li><a href="#4433754832" class="scroll-to">Django REST framework</a></li>
+          <li><a href="#2724332685800" class="scroll-to">Swagger</a></li>
+          <li><a href="#2724332686248" class="scroll-to">OpenAPI</a></li>
+          <li><a href="#2724332686752" class="scroll-to">Django REST framework</a></li>
       </ul>
 
       <hr>
@@ -262,15 +262,15 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
         <hr>
 
 
-        <h1 id="4433754896">Swagger</h1>
+        <h1 id="2724332685800">Swagger</h1>
 
           <div class="endpoint get">
             <a href="/写完代码/就能同步产出成品文档" target="_blank" style="color: inherit">/写完代码/就能同步产出成品文档</a>
           </div>
 
 
-            <div class="alert alert-ee"><p><strong>解决痛点:</strong></p>
-<p>随着时间推移，不断修改接口实现的时候都必须同步修改接口文档，而文档与代码又处于两个不同的媒介，除非有严格的管理机制，不然很容易导致不一致现象。</p>
+            <div class="alert alert-ee"><h4>解决痛点:</h4>
+<h5>随着时间推移，不断修改接口实现的时候都必须同步修改接口文档，而文档与代码又处于两个不同的媒介，除非有严格的管理机制，不然很容易导致不一致现象。</h5>
 </div>
 
 
@@ -281,12 +281,14 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 
             <div class="alert alert-warning">
               <p><img src="assets/swagger_ui_example.png" width="800"></p>
-<h4>被很多著名的框架都直接或间接的支持</h4>
+<p><br><br><br></p>
+<h4>Swagger 被很多著名的框架都直接或间接的支持</h4>
 <ol>
 <li>Java 领域，著名的 <code>spring-swagger</code>，后更名为 <code>springfox</code></li>
 <li>django-rest-framework 搭配 <code>drf_yasg</code> 或 <code>coreapi</code></li>
 <li><code>FastAPI</code> 更是完美的原生支持，可一键生成 swagger 风格文档</li>
-<li>...</li>
+<li>...
+<br><br></li>
 </ol>
 
             </div>
@@ -295,7 +297,7 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
         <hr>
 
 
-        <h1 id="4433754768">OpenAPI</h1>
+        <h1 id="2724332686248">OpenAPI</h1>
 
           <div class="endpoint post">
             <a href="/从 swagger2 /到 openapi3" target="_blank" style="color: inherit">/从 swagger2 /到 openapi3</a>
@@ -317,11 +319,13 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 <ol>
 <li><code>OpenAPI</code>: 根据规范编写出 <code>yaml</code> 或 <code>json</code> 文件，然后使用 <code>Swagger</code>、<code>ReDoc</code> 等渲染出成品文档</li>
 <li><code>RAML</code>: 根据规范编写出 <code>raml</code> 文件，然后使用 <code>raml2html</code> 等渲染出成品文档</li>
-<li><code>API Blueprint</code>: 根据规范编写出 <code>markdown</code> 文件，然后使用 <code>Aglio</code>、<code>snowboard</code> 等渲染出成品文档</li>
+<li><code>API Blueprint</code>: 根据规范编写出 <code>markdown</code> 文件，然后使用 <code>Aglio</code>、<code>snowboard</code> 等渲染出成品文档
+<br><br><br></li>
 </ol>
-<h4>规范简介</h4>
-<p><img src="assets/2to3.png" alt="avatar"></p>
+<h4>Swagger2 ===&gt; OpenAPI3</h4>
+<p><img src="assets/2to3.png" width="800"></p>
 <p>参考: <a href="https://stuff.rdme.io/swagger2to3">https://stuff.rdme.io/swagger2to3</a></p>
+<h4>规范简单解读</h4>
 <pre><code># OpenAPI 规范版本号
 openapi: 3.0.3
 
@@ -334,18 +338,19 @@ servers:
 # API 的分组标签
 tags:
 
-# 声明 API 使用的安全机制
-security:
-
 # 对所提供的 API 有效的路径和操作
 paths:
 
 # 一个包含多种纲要的元素，可重复使用组件
 components:
 
+# 声明 API 使用的安全机制
+security:
+
 # 附加文档
 externalDocs:
 </code></pre>
+<p><br><br></p>
 <h4>info 部分</h4>
 <pre><code>info:
   title:  xx开放平台接口文档                    # 应用的名称
@@ -361,6 +366,8 @@ externalDocs:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 </code></pre>
+<p><img src="assets/demo_info.png" style="border: solid 1px gray;border-radius: 20px;">
+<br><br></p>
 <h4>servers 部分</h4>
 <pre><code>servers:  
   - url: https://development.server.com/v1
@@ -376,6 +383,8 @@ externalDocs:
           - v2
         default: v2
 </code></pre>
+<p><img src="assets/demo_servers.png" style="border: solid 1px gray;border-radius: 20px;">
+<br><br></p>
 <h4>tags 部分</h4>
 <pre><code>tags: 
   - name: store
@@ -388,21 +397,8 @@ externalDocs:
       description: 外部文档
       url: 'http://pet.docs.io'
 </code></pre>
-<h4>security 部分</h4>
-<pre><code>BasicAuth:
-  type: http
-  scheme: basic
-
-JWT:
-  type: http
-  scheme: bearer
-  bearerFormat: jwt
-
-APIKey:
-  type: apiKey
-  name: api_key
-  in: header
-</code></pre>
+<p><img src="assets/demo_tags.png" style="border: solid 1px gray;border-radius: 20px;">
+<br><br></p>
 <h4>paths 部分</h4>
 <pre><code># 对所提供的 API 有效的路径和操作
 paths:
@@ -468,9 +464,9 @@ paths:
           description: 无效的 id
         '404':
           description: 找不到指定的资源
-      security:             # 作用于此操作的安全机制
-        - APIKey: []         # 可以声明一个空数组来变相的移除顶层的安全声明
 </code></pre>
+<p><img src="assets/demo_paths.png" style="border: solid 1px gray;border-radius: 20px;">
+<br><br></p>
 <h4>components 部分</h4>
 <pre><code>components:
   schemas:
@@ -491,7 +487,7 @@ paths:
 
   callbacks:
 </code></pre>
-<h4>上例使用 components 优化</h4>
+<h4>使用 components 进行优化</h4>
 <pre><code>paths:
   '/pet/{petId}':
     get:
@@ -519,8 +515,6 @@ paths:
           description: 无效的 id
         '404':
           description: 找不到指定的资源
-      security:             # 作用于此操作的安全机制
-        - api_key: []         # 可以声明一个空数组来变相的移除顶层的安全声明
 
 components:
   schemas:
@@ -567,12 +561,12 @@ components:
         name:
           type: string
 </code></pre>
+<p><img src="assets/demo_components.png" style="border: solid 1px gray;border-radius: 20px;">
+<br><br></p>
 <h4>POST 传参的例子</h4>
 <pre><code>paths:
   /pet:
     post:
-      tags:
-        - pet
       summary: 向商店中添加新的宠物
       operationId: addPet
       requestBody:    # 请求体
@@ -583,8 +577,73 @@ components:
             schema:
               $ref: '#/components/schemas/Pet'
 </code></pre>
+<p><img src="assets/demo_post.png" style="border: solid 1px gray;border-radius: 20px;">
+<br><br></p>
+<h4>security 部分</h4>
+<pre><code>components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: jwt
+    APIKey:
+      type: apiKey
+      name: api_key
+      in: header
+
+security:
+  - BasicAuth
+  - APIKey
+</code></pre>
+<p><img src="assets/demo_security.png" style="border: solid 1px gray;border-radius: 20px;">
+<br><br></p>
 <p>参考: <a href="https://www.jianshu.com/p/5365ef83252a">https://www.jianshu.com/p/5365ef83252a</a></p>
-<h4>生成文档:</h4>
+
+
+
+
+
+        <hr>
+
+
+        <h1 id="2724332686752">Django REST framework</h1>
+
+          <div class="endpoint put">
+            <a href="/3.9 版本开始/官方逐步加强对 openapi3 的支持" target="_blank" style="color: inherit">/3.9 版本开始/官方逐步加强对 openapi3 的支持</a>
+          </div>
+
+
+            <div class="alert alert-ee"><h4>现状:</h4>
+<ol>
+<li>官网首页推荐 <code>core-api</code>，已停更 <br><br> <img src="assets/coreapi.png" alt="avatar"> <br></li>
+<li>历史人气最高 <code>django-rest-swagger</code>，已停更 <br><br> <img src="assets/drf_swagger.png" alt="avatar"> <br></li>
+<li>继承者 <code>drf-yasg</code>，只支持 swagger2 <br><br> <img src="assets/drf_yasg.png" alt="avatar"> <br></li>
+</ol>
+</div>
+
+
+
+
+
+
+
+            <div class="alert alert-warning">
+              <h4>官方自带生成 openapi3</h4>
+<pre><code class="lang-python">from rest_framework.schemas import get_schema_view
+
+schema_view = get_schema_view(title=&#39;XXX API Document&#39;)
+
+urlpatterns = [
+    path(&#39;openapi/&#39;, schema_view),
+    # ...
+]
+</code></pre>
+<p><img src="assets/drf_openapi.png" alt="avatar"></p>
+<h4>可惜，还没有 UI！</h4>
+<h4>不过，自己写一个也方便:</h4>
 <pre><code class="lang-html">&lt;!DOCTYPE html&gt;
 &lt;html&gt;
   &lt;head&gt;
@@ -598,7 +657,7 @@ components:
     &lt;script src=&quot;//unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js&quot;&gt;&lt;/script&gt;
     &lt;script&gt;
     const ui = SwaggerUIBundle({
-        url: &quot;{% url openapi_url %}&quot;,
+        url: &quot;openapi.yaml&quot;,
         dom_id: &#39;#swagger-ui&#39;,
         presets: [
           SwaggerUIBundle.presets.apis,
@@ -610,56 +669,7 @@ components:
   &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;ReDoc&lt;/title&gt;
-    &lt;!-- needed for adaptive design --&gt;
-    &lt;meta charset="utf-8"/&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
-    &lt;link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet"&gt;
-    &lt;!-- ReDoc doesn't change outer page styles --&gt;
-    &lt;style&gt;
-      body {
-        margin: 0;
-        padding: 0;
-      }
-    &lt;/style&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;redoc spec-url='{% url openapi_url %}'&gt;&lt;/redoc&gt;
-    &lt;script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"&gt; &lt;/script&gt;
-  &lt;/body&gt;
-&lt;/html&gt;
-</code></pre>
 
-
-
-
-
-        <hr>
-
-
-        <h1 id="4433754832">Django REST framework</h1>
-
-          <div class="endpoint put">
-            <a href="/3.9 版本开始/官方支持 openapi3" target="_blank" style="color: inherit">/3.9 版本开始/官方支持 openapi3</a>
-          </div>
-
-
-
-
-
-
-
-            <p>
-                返回结果说明:
-            </p>
-            
-
-
-            <div class="alert alert-warning">
-              
             </div>
 
 

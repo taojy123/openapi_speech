@@ -4,14 +4,20 @@ from eave import Doc, Note, Api, PP, QP, BP
 def img(src, w=0):
     if not src.startswith('http:'):
         # src = 'https://raw.githubusercontent.com/taojy123/openapi_speech/master/assets/' + src
+        # src = 'https://github.com/taojy123/openapi_speech/raw/master/assets/' + src
         src = 'assets/' + src
     if w:
         return f'<img src="{src}" width="{w}">'
     return f'![avatar]({src})'
 
+def img2(src):
+    if not src.startswith('http:'):
+        # src = 'https://raw.githubusercontent.com/taojy123/openapi_speech/master/assets/' + src
+        src = 'assets/' + src
+    return f'<img src="{src}" style="border: solid 1px gray;border-radius: 20px;">'
 
 
-doc = Doc(title='OpenAPI 在 Django 项目中的应用 ', host='speech.tslow.cn', version='2020-06-14')
+doc = Doc(title='OpenAPI 在 Django 项目中的应用 ', host='openapi.tslow.cn', version='2020-06-14')
 
 
 note = Note(title='开场小互动')
@@ -69,20 +75,20 @@ api = Api()
 api.title = 'Swagger'
 api.url = '/写完代码/就能同步产出成品文档'
 api.description = """
-**解决痛点:**
-
-随着时间推移，不断修改接口实现的时候都必须同步修改接口文档，而文档与代码又处于两个不同的媒介，除非有严格的管理机制，不然很容易导致不一致现象。
+#### 解决痛点:
+##### 随着时间推移，不断修改接口实现的时候都必须同步修改接口文档，而文档与代码又处于两个不同的媒介，除非有严格的管理机制，不然很容易导致不一致现象。
 """
 api.tips = f"""
 
 {img('swagger_ui_example.png', 800)}
 
-
-#### 被很多著名的框架都直接或间接的支持
+<br><br><br>
+#### Swagger 被很多著名的框架都直接或间接的支持
 1. Java 领域，著名的 `spring-swagger`，后更名为 `springfox`
 2. django-rest-framework 搭配 `drf_yasg` 或 `coreapi`
 3. `FastAPI` 更是完美的原生支持，可一键生成 swagger 风格文档
 4. ...
+<br><br>
 """
 doc.add_api(api)
 
@@ -99,13 +105,15 @@ api.response_description = f"""
 1. `OpenAPI`: 根据规范编写出 `yaml` 或 `json` 文件，然后使用 `Swagger`、`ReDoc` 等渲染出成品文档
 2. `RAML`: 根据规范编写出 `raml` 文件，然后使用 `raml2html` 等渲染出成品文档
 3. `API Blueprint`: 根据规范编写出 `markdown` 文件，然后使用 `Aglio`、`snowboard` 等渲染出成品文档
+<br><br><br>
 
-#### 规范简介
+#### Swagger2 ===> OpenAPI3
 
-{img('2to3.png')}
+{img('2to3.png', 800)}
 
 参考: https://stuff.rdme.io/swagger2to3
 
+#### 规范简单解读
 ```
 # OpenAPI 规范版本号
 openapi: 3.0.3
@@ -119,18 +127,19 @@ servers:
 # API 的分组标签
 tags:
 
-# 声明 API 使用的安全机制
-security:
-
 # 对所提供的 API 有效的路径和操作
 paths:
 
 # 一个包含多种纲要的元素，可重复使用组件
 components:
 
+# 声明 API 使用的安全机制
+security:
+
 # 附加文档
 externalDocs:
 ```
+<br><br>
 
 #### info 部分
 ```
@@ -148,7 +157,8 @@ info:
     name: Apache 2.0
     url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
 ```
-
+{img2('demo_info.png')}
+<br><br>
 #### servers 部分
 ```
 servers:  
@@ -165,7 +175,8 @@ servers:
           - v2
         default: v2
 ```
-
+{img2('demo_servers.png')}
+<br><br>
 #### tags 部分
 ```
 tags: 
@@ -179,24 +190,8 @@ tags:
       description: 外部文档
       url: 'http://pet.docs.io'
 ```
-
-#### security 部分
-```
-BasicAuth:
-  type: http
-  scheme: basic
-
-JWT:
-  type: http
-  scheme: bearer
-  bearerFormat: jwt
-
-APIKey:
-  type: apiKey
-  name: api_key
-  in: header
-```
-
+{img2('demo_tags.png')}
+<br><br>
 #### paths 部分
 ```
 # 对所提供的 API 有效的路径和操作
@@ -263,10 +258,9 @@ paths:
           description: 无效的 id
         '404':
           description: 找不到指定的资源
-      security:             # 作用于此操作的安全机制
-        - APIKey: []         # 可以声明一个空数组来变相的移除顶层的安全声明
 ```
-
+{img2('demo_paths.png')}
+<br><br>
 #### components 部分
 ```
 components:
@@ -289,7 +283,7 @@ components:
   callbacks:
 ```
 
-#### 上例使用 components 优化
+#### 使用 components 进行优化
 ```
 paths:
   '/pet/{{petId}}':
@@ -318,8 +312,6 @@ paths:
           description: 无效的 id
         '404':
           description: 找不到指定的资源
-      security:             # 作用于此操作的安全机制
-        - api_key: []         # 可以声明一个空数组来变相的移除顶层的安全声明
 
 components:
   schemas:
@@ -366,14 +358,13 @@ components:
         name:
           type: string
 ```
-
+{img2('demo_components.png')}
+<br><br>
 #### POST 传参的例子
 ```
 paths:
   /pet:
     post:
-      tags:
-        - pet
       summary: 向商店中添加新的宠物
       operationId: addPet
       requestBody:    # 请求体
@@ -384,10 +375,35 @@ paths:
             schema:
               $ref: '#/components/schemas/Pet'
 ```
+{img2('demo_post.png')}
+<br><br>
+#### security 部分
+```
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+    JWT:
+      type: http
+      scheme: bearer
+      bearerFormat: jwt
+    APIKey:
+      type: apiKey
+      name: api_key
+      in: header
+
+security:
+  - BasicAuth
+  - APIKey
+```
+{img2('demo_security.png')}
+<br><br>
+
 参考: https://www.jianshu.com/p/5365ef83252a
 
-""" + """
-#### 生成文档:
+
+#### 生成文档 UI
 ```html
 <!DOCTYPE html>
 <html>
@@ -401,39 +417,16 @@ paths:
     <div id="swagger-ui"></div>
     <script src="//unpkg.com/swagger-ui-dist@3/swagger-ui-bundle.js"></script>
     <script>
-    const ui = SwaggerUIBundle({
-        url: "{% url openapi_url %}",
+    const ui = SwaggerUIBundle({{
+        url: "{{% url schema_url %}}",
         dom_id: '#swagger-ui',
         presets: [
           SwaggerUIBundle.presets.apis,
           SwaggerUIBundle.SwaggerUIStandalonePreset
         ],
         layout: "BaseLayout"
-      })
+      }})
     </script>
-  </body>
-</html>
-```
-```
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>ReDoc</title>
-    <!-- needed for adaptive design -->
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
-    <!-- ReDoc doesn't change outer page styles -->
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <redoc spec-url='{% url openapi_url %}'></redoc>
-    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
   </body>
 </html>
 ```
@@ -444,13 +437,42 @@ doc.add_api(api)
 
 api = Api(method='PUT')
 api.title = 'Django REST framework'
-api.url = '/3.9 版本开始/官方支持 openapi3'
-api.response_description = """
+api.url = '/3.9 版本开始/官方逐步加强对 openapi3 的支持'
+api.description = f"""
+#### 现状:
+1. 官网首页推荐 `core-api`，已停更 <br><br> {img('coreapi.png')} <br>
+2. 历史人气最高 `django-rest-swagger`，已停更 <br><br> {img('drf_swagger.png')} <br>
+3. 继承者 `drf-yasg`，只支持 swagger2 <br><br> {img('drf_yasg.png')} <br>
 """
 api.tips = f"""
+#### 官方自带生成 openapi3
+```python
+from rest_framework.schemas import get_schema_view
+
+urlpatterns = [
+    path('openapi/', get_schema_view(title='XXX API Document'), name='openapi'),
+    # ...
+]
+```
+{img('drf_openapi.png')}
+
+#### 可惜，还没有 UI！
+
+#### 不过，自己写一个也不难:
+```html
+from django.views.generic import TemplateView
+
+urlpatterns = [
+    path('swagger-ui/', TemplateView.as_view(
+        template_name='swagger-ui.html',
+        extra_context={'schema_url': 'openapi'}
+    ), name='swagger-ui'),
+]
+```
+
+
 """
 doc.add_api(api)
-
 
 
 
