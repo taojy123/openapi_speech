@@ -22,13 +22,20 @@ doc = Doc(title='OpenAPI 在 Django 项目中的应用 ', host='openapi.tslow.cn
 
 note = Note(title='开场小互动')
 note.content = f"""
-#### 大家一般使用什么工具写接口文档?
-1. Swagger(openapi) <br><br> {img('swagger_logo.png', 200)} <br>
-2. RAML <br><br>  {img('raml_logo.png', 200)} <br>
-3. API Blueprint <br><br>  {img('apiblueprint_logo.jpg', 200)} <br>
-4. 其他工具 <br><br>  {img('other_tools.png', 200)} <br>
-5. 啥都不需要，用手写就行 <br><br>  {img('hand.png', 200)} <br>
-<br><br><br><br>
+#### 大家一般使用什么工具写文档?
+1. **Swagger** (openapi) <br><br> {img('swagger_logo.png', 200)} <br>
+2. **RAML** <br><br>  {img('raml_logo.png', 200)} <br>
+3. **API Blueprint** <br><br>  {img('apiblueprint_logo.jpg', 200)} <br>
+4. **其他工具** <br><br>  {img('other_tools.png', 200)} <br>
+5. **啥都不需要，咱用手写** <br><br>  {img('hand.png', 200)} <br>
+<br><br><br>
+
+#### 说程序员最痛恨的 4 件事情
+1. 写注释
+2. 写文档
+3. 别人不写注释
+4. 别人不写文档
+<br><br><br>
 """
 doc.add_note(note)
 
@@ -37,13 +44,6 @@ note = Note(title='开始今天我们话题，接口文档')
 note.content = f"""
 - 谁写文档: `后端工程师`
 - 写给谁看: `前端工程师`
-<br><br>
-
-#### 说程序员最痛恨的 4 件事情
-1. 写注释
-2. 写文档
-3. 别人不写注释
-4. 别人不写文档
 <br><br>
 
 #### 青铜玩家的文档
@@ -398,6 +398,7 @@ security:
   - APIKey
 ```
 {img2('demo_security.png')}
+{img2('demo_security2.png')}
 <br><br>
 
 参考: https://www.jianshu.com/p/5365ef83252a
