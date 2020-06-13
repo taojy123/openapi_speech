@@ -24,16 +24,8 @@ doc.description = """
 """
 
 
-note = Note(title='开场小互动')
+note = Note(title='先听个段子')
 note.content = f"""
-#### 大家一般使用什么工具写文档?
-1. **Swagger** (openapi) <br><br> {img('swagger_logo.png', 200)} <br>
-2. **RAML** <br><br>  {img('raml_logo.png', 200)} <br>
-3. **API Blueprint** <br><br>  {img('apiblueprint_logo.jpg', 200)} <br>
-4. **其他工具** <br><br>  {img('other_tools.png', 200)} <br>
-5. **啥都不需要，咱用手写** <br><br>  {img('hand.png', 200)} <br>
-<br><br><br>
-
 #### 说程序员最痛恨的 4 件事情
 1. 写注释
 2. 写文档
@@ -75,42 +67,14 @@ note.content = f"""
 doc.add_note(note)
 
 
-api = Api()
-api.title = 'Swagger'
-api.url = '/写完代码/就能同步产出成品文档'
-api.description = f"""
-#### 解决痛点:
-##### 随着时间推移，不断修改接口实现的时候都必须同步修改接口文档，而文档与代码又处于两个不同的媒介，除非有严格的管理机制，不然很容易导致不一致现象。
-"""
-api.tips = f"""
-#### Swagger 被很多著名的框架都直接或间接的支持
-1. Java 领域，著名的 `spring-swagger`，后更名为 `springfox`
-2. django-rest-framework 搭配 `drf_yasg` 或 `coreapi`
-3. `FastAPI` 更是完美的原生支持，可一键生成 swagger 风格文档
-4. ...
-<br><br>
-{img('swagger_ui_example.png', 500)}
-"""
-doc.add_api(api)
-
-
-api = Api(method='POST')
+api = Api(method='GET')
 api.title = 'OpenAPI'
 api.url = '/从 swagger2 /到 openapi3'
-api.description = """
-##### 各主流工具的对比
-1. `OpenAPI`: 根据规范编写出 `yaml` 或 `json` 文件，然后使用 `Swagger`、`ReDoc` 等渲染出成品文档
-2. `RAML`: 根据规范编写出 `raml` 文件，然后使用 `raml2html` 等渲染出成品文档
-3. `API Blueprint`: 根据规范编写出 `markdown` 文件，然后使用 `Aglio`、`snowboard` 等渲染出成品文档
-##### OpenAPI 是规范，Swagger 是实现规范的工具
-"""
 api.response_description = f"""
-#### 规范简要解读
-
 {img('2to3.png', 800)}
 参考: https://stuff.rdme.io/swagger2to3
 
-<br><br>
+#### OpenAPI3 规范简要解读
 ```
 # OpenAPI 规范版本号
 openapi: 3.0.3
@@ -399,9 +363,20 @@ security:
 <br><br>
 
 参考: https://www.jianshu.com/p/5365ef83252a
+"""
+doc.add_api(api)
 
 
-#### 生成文档 UI
+api = Api(method='POST')
+api.title = 'Swagger'
+api.url = '/OpenAPI 是规范/Swagger 是实现规范的工具'
+api.description = f"""
+#### 各主流工具
+1. `OpenAPI`: 根据规范编写出 `yaml` 或 `json` 文件，然后使用 `Swagger`、`ReDoc` 等渲染出成品文档 <br><br> {img('swagger_logo.png', 200)} <br>
+2. `RAML`: 根据规范编写出 `raml` 文件，然后使用 `raml2html` 等渲染出成品文档 <br><br> {img('raml_logo.png', 200)} <br>
+3. `API Blueprint`: 根据规范编写出 `markdown` 文件，然后使用 `Aglio`、`snowboard` 等渲染出成品文档 <br><br> {img('apiblueprint_logo.png', 200)} <br>
+
+#### Swagger-UI
 ```html
 <!DOCTYPE html>
 <html>
@@ -428,6 +403,15 @@ security:
   </body>
 </html>
 ```
+"""
+api.tips = f"""
+####  众多著名的框架都直接或间接的支持 Swagger 插件
+1. Java 领域，著名的 `spring-swagger`，后更名为 `springfox`
+2. django-rest-framework 搭配 `drf_yasg` 或 `coreapi`
+3. `FastAPI` 更是完美的原生支持，可一键生成 swagger 风格文档
+4. ...
+
+##### **解决痛点:** 随着时间推移，不断修改接口实现的时候都必须同步修改接口文档，而文档与代码又处于两个不同的媒介，除非有严格的管理机制，不然很容易导致不一致现象。
 
 """
 doc.add_api(api)
@@ -477,11 +461,11 @@ api.tips = """
 #### 看似很完美，其实问题不少
 1. 没有 `security` 安全机制说明
 2. 没有 `tags` 分类
-3. 没有使用 `components` 进行优化
-4. Model 中定义的字段默认值没法反应到文档中
+3. Model 中的 `verbose_name` 没法反应到文档中
+4. Model 中的 `default` 没法反应到文档中
 5. 含有 lazytext 的话，生成文档就会出错
-6. 文档中无法体现 `versioning`
-7. django_filter 中的参数 `description` 没有语义化
+6. 没有使用 `components` 进行优化
+7. 文档中无法体现 `versioning`
 
 <br><br>
 
@@ -495,6 +479,15 @@ doc.add_api(api)
 
 
 doc.ending = """
+#### 互动竞答
+
+##### 请问，`Swagger2` 同 `OpenAPI3` 的关系与下面几组关系中的那一组最相似?
+1. `Django` / `Django REST framework`
+2. `RAML` / `raml2html`
+3. `Python2` / `Python3`
+4. `Python` / `Javascript`
+
+<br>
 ##### *谢谢大家 后会有期*
 """
 

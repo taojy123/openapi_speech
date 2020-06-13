@@ -1,81 +1,69 @@
-
+# OpenAPI 规范版本号
 openapi: 3.0.3
 
 # API 元数据信息
 info:
+  title: 用户登陆
+
 
 # 服务器连接信息
 servers:
+  - url: http://xx.com
 
 # API 的分组标签
 tags:
 
 # 对所提供的 API 有效的路径和操作
 paths:
-  /pet:
+  /api/user/login:
     post:
-      summary: 向商店中添加新的宠物
-      operationId: addPet
-      requestBody:    # 请求体
-        description: 需要被添加进商店的 Pet 对象
-        required: true # 请求体是否被包含在请求中，默认值 false
-        content:      # 请求体的内容
+      summary: 用户登陆接口
+      operationId: user_login
+      requestBody:
+        required: true 
+        content:  
           application/json:
             schema:
-              $ref: '#/components/schemas/Pet'
+              type: object
+              properties:
+                username:
+                  type: string
+                  description: 用户名
+                password:
+                  type: string
+                  description: 密码
+      responses:
+        '200':
+          description: 操作成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  err_code:
+                    type: integer
+                  data:
+                    type: object
+                    properties:
+                      uid:
+                        type: string
+                      username:
+                        type: string
+                      name:
+                        type: string
+                      groupid:
+                        type: integer
+                      reg_time:
+                        type: string
+                      last_login_time:
+                        type: string
+
 
 # 一个包含多种纲要的元素，可重复使用组件
 components:
-  schemas:
-    Pet:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        category:
-          $ref: '#/components/schemas/Category'
-        name:
-          type: string
-          example: doggie
-        photoUrls:
-          type: array
-          items:
-            type: string
-        tags:
-          type: array
-          items:
-            $ref: '#/components/schemas/Tag'
-        status:
-          type: string
-          description: 宠物在商店的状态
-          enum:
-            - available
-            - pending
-            - sold
-    Category:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
-    Tag:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int64
-        name:
-          type: string
 
-
-    
 # 声明 API 使用的安全机制
 security:
-  - BasicAuth
-  - APIKey
 
 # 附加文档
 externalDocs:
