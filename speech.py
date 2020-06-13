@@ -17,7 +17,11 @@ def img2(src):
     return s
 
 
-doc = Doc(title='OpenAPI 在 Django 项目中的应用 ', host='openapi.tslow.cn', version='2020-06-14')
+doc = Doc(title='OpenAPI 在 Django 项目中的应用', host='openapi.tslow.cn', version='2020-06-14')
+
+doc.description = """
+##### 主讲人: 陶佳元 [tslow.cn](https://tslow.cn)
+"""
 
 
 note = Note(title='开场小互动')
@@ -74,21 +78,18 @@ doc.add_note(note)
 api = Api()
 api.title = 'Swagger'
 api.url = '/写完代码/就能同步产出成品文档'
-api.description = """
+api.description = f"""
 #### 解决痛点:
 ##### 随着时间推移，不断修改接口实现的时候都必须同步修改接口文档，而文档与代码又处于两个不同的媒介，除非有严格的管理机制，不然很容易导致不一致现象。
 """
 api.tips = f"""
-
-{img('swagger_ui_example.png', 800)}
-
-<br><br><br>
 #### Swagger 被很多著名的框架都直接或间接的支持
 1. Java 领域，著名的 `spring-swagger`，后更名为 `springfox`
 2. django-rest-framework 搭配 `drf_yasg` 或 `coreapi`
 3. `FastAPI` 更是完美的原生支持，可一键生成 swagger 风格文档
 4. ...
 <br><br>
+{img('swagger_ui_example.png', 500)}
 """
 doc.add_api(api)
 
@@ -97,23 +98,19 @@ api = Api(method='POST')
 api.title = 'OpenAPI'
 api.url = '/从 swagger2 /到 openapi3'
 api.description = """
-##### OpenAPI 是规范
-##### Swagger 是实现规范的工具
-"""
-api.response_description = f"""
-#### 各其他主流工具的对比
+##### 各主流工具的对比
 1. `OpenAPI`: 根据规范编写出 `yaml` 或 `json` 文件，然后使用 `Swagger`、`ReDoc` 等渲染出成品文档
 2. `RAML`: 根据规范编写出 `raml` 文件，然后使用 `raml2html` 等渲染出成品文档
 3. `API Blueprint`: 根据规范编写出 `markdown` 文件，然后使用 `Aglio`、`snowboard` 等渲染出成品文档
-<br><br><br>
-
-#### Swagger2 ===> OpenAPI3
+##### OpenAPI 是规范，Swagger 是实现规范的工具
+"""
+api.response_description = f"""
+#### 规范简要解读
 
 {img('2to3.png', 800)}
-
 参考: https://stuff.rdme.io/swagger2to3
 
-#### 规范简单解读
+<br><br>
 ```
 # OpenAPI 规范版本号
 openapi: 3.0.3
@@ -170,10 +167,10 @@ servers:
       subdomain:
         default: production
       version:
+        default: v2
         enum:
           - v1
           - v2
-        default: v2
 ```
 {img2('demo_servers.png')}
 <br><br>
@@ -441,13 +438,13 @@ api.title = 'Django REST framework'
 api.url = '/3.9 版本开始/官方逐步加强对 openapi3 的支持'
 api.description = f"""
 #### 现状:
-1. 官网首页推荐 `core-api`，已停更 <br><br> {img('coreapi.png')} <br>
-2. 历史人气最高 `django-rest-swagger`，已停更 <br><br> {img('drf_swagger.png')} <br>
-3. 继承者 `drf-yasg`，只支持 swagger2 <br><br> {img('drf_yasg.png')} <br>
+1. 官网首页推荐 `core-api`，已停更 <br><br> {img('coreapi.png', 700)} <br>
+2. 历史人气最高 `django-rest-swagger`，已停更 <br><br> {img('drf_swagger.png', 700)} <br>
+3. 继承者 `drf-yasg`，只支持 swagger2 <br><br> {img('drf_yasg.png', 700)} <br>
 """
 
 api.response_description = f"""
-#### 官方自带生成 openapi3
+#### 官方生成方法
 ```python
 from rest_framework.schemas import get_schema_view
 
@@ -461,7 +458,7 @@ urlpatterns = [
 #### 可惜，还没有 UI！
 <br>
 
-#### 不过，自己写一个也不难
+#### 自己写一个也不难
 ```python
 from django.views.generic import TemplateView
 
@@ -473,23 +470,33 @@ urlpatterns = [
     ), name='swagger-ui'),
 ]
 ```
-<br><br>
+{img2('swagger.png')}
 """
 
 api.tips = """
 #### 看似很完美，其实问题不少
 1. 没有 `security` 安全机制说明
-2. 文档中无法体现 `versioning`
+2. 没有 `tags` 分类
 3. 没有使用 `components` 进行优化
-4. 字段参数的 `description` 是用的是 `help_text` ，而非 `label`
-5. 字段参数没有默认值
-6. 含有 lazytext 的话，生成 openapi 时会出错
+4. Model 中定义的字段默认值没法反应到文档中
+5. 含有 lazytext 的话，生成文档就会出错
+6. 文档中无法体现 `versioning`
 7. django_filter 中的参数 `description` 没有语义化
-8. 自定义 action
+
+<br><br>
+
+#### 解决方案和思路
+1. `get_schema_view` 中传参 `generator_class`，改写 `openapi.SchemaGenerator`
+2. `ViewSet` 设定 `schema`，改写 `openapi.AutoSchema`
+3. 对 `OpenAPIRenderer` 和 `JSONOpenAPIRenderer` 进行 monkey patch
+4. 等待 drf 官方支持或修复，也可以尝试贡献代码
 """
 doc.add_api(api)
 
 
+doc.ending = """
+##### *谢谢大家 后会有期*
+"""
 
 doc.build('speech.html', 'zh')
 
