@@ -23,21 +23,21 @@ from rest_framework.schemas import get_schema_view
 from rest_framework.utils import json, encoders
 
 
-# def render(self, data, media_type=None, renderer_context=None):
-#     return json.dumps(data, indent=2, cls=encoders.JSONEncoder).encode('utf-8')
-#
-#
-# def render2(self, data, media_type=None, renderer_context=None):
-#     data = json.loads(json.dumps(data, cls=encoders.JSONEncoder))
-#     return yaml.dump(data, default_flow_style=False, sort_keys=False, allow_unicode=True).encode('utf-8')
-#
-#
-# JSONOpenAPIRenderer.render = render
-# OpenAPIRenderer.render = render2
+def render(self, data, media_type=None, renderer_context=None):
+    return json.dumps(data, indent=2, cls=encoders.JSONEncoder).encode('utf-8')
+
+
+def render2(self, data, media_type=None, renderer_context=None):
+    data = json.loads(json.dumps(data, cls=encoders.JSONEncoder))
+    return yaml.dump(data, default_flow_style=False, sort_keys=False, allow_unicode=True).encode('utf-8')
+
+
+JSONOpenAPIRenderer.render = render
+OpenAPIRenderer.render = render2
 
 urlpatterns = [
     path('tapp/', include('tapp.urls')),
-    path('openapi/', get_schema_view(title='XXX API Document'), name='openapi'),
+    path('openapi/', get_schema_view(title=_('XXX API Document')), name='openapi'),
     path('swagger-ui/', TemplateView.as_view(
         template_name='swagger-ui.html',
         extra_context={'schema_url': 'openapi'}
