@@ -37,7 +37,7 @@ OpenAPIRenderer.render = render2
 
 urlpatterns = [
     path('tapp/', include('tapp.urls')),
-    path('openapi/', get_schema_view(title=_('XXX API Document')), name='openapi'),
+    path('openapi/', get_schema_view(title=_('API Document')), name='openapi'),
     path('swagger-ui/', TemplateView.as_view(
         template_name='swagger-ui.html',
         extra_context={'schema_url': 'openapi'}
